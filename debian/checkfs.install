@@ -1,0 +1,2 @@
+07checkfs etc/X11/Xsession.d
+checkfs usr/bin
