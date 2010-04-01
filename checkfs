@@ -1,29 +1,37 @@
 #!/bin/sh
 
+first() {
+  echo "$1"
+}
+
+mountpoint_device() {
+  grep "$1" /etc/fstab | awk '{print $1}'
+}
+
 check_repair_fs() {
-  MOUNTPOINT="$1"
+  DEVICE="$1"
   NAME="$2"
 
-  if [ x"$(mount | grep "on $MOUNTPOINT type vfat .ro,")" != x ]; then
-      DEV=$(mount | grep " $MOUNTPOINT " | awk '{print $1}')
-      fsck.vfat -y "$DEV"
-      if [ $? -le 3 ]; then
-          mount -o remount,rw "$DEV"
-          return $?
-      else
-          return $?
-      fi
+  if ! [ -e "$DEVICE" ]; then
+    return 0
   fi
-  return 0
+
+  mount -o remount,ro "$DEVICE"
+  fsck.vfat -y "$DEVICE"
+  if [ $? -le 3 ]; then
+    mount -o remount,rw "$DEVICE"
+  else
+    return $?
+  fi
 }
 
 # FIXME: a bit more flexible
 
-if ! check_repair_fs "/media/sd" "SD card"; then
+if ! check_repair_fs $(first /dev/mmcblk*) "SD card"; then
   emessage "Filesystem on SD card is damaged. Please reformat or repair it."
 fi
 
-if ! check_repair_fs "/mnt/storage" "Internal storage"; then
+if ! check_repair_fs $(mountpoint_device /mnt/storage) "Internal storage"; then
   emessage "Internal storage filesystem is damaged. Please attach device to computer and reformat or repair it."&
   usbwatcher&
   while true; do sleep 10000; done
