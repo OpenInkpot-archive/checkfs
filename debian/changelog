@@ -1,3 +1,11 @@
+checkfs (0.2) zelazny; urgency=low
+
+  * Unconditionally check filesystems on startup - should catch more FS
+    corruption bugs, as some of them are not severe enough to make kernel
+    remount FAT partitions read/only.
+
+ -- Mikhail Gusarov <dottedmag@dottedmag.net>  Fri, 02 Apr 2010 01:40:46 +0700
+
 checkfs (0.1) asimov; urgency=low
 
   * First build for OpenInkpot.
