@@ -27,7 +27,7 @@ check_repair_fs() {
 
 # FIXME: a bit more flexible
 
-if ! check_repair_fs $(first /dev/mmcblk*) "SD card"; then
+if ! check_repair_fs $(first /dev/mmcblk*p*) "SD card"; then
   emessage "Filesystem on SD card is damaged. Please reformat or repair it."
 fi
 
