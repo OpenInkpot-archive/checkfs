@@ -1,3 +1,9 @@
+checkfs (0.3) zelazny; urgency=low
+
+  * Fixed SD card checking: check /dev/mmcblk0p1, not /dev/mmcblk0
+
+ -- Mikhail Gusarov <dottedmag@dottedmag.net>  Sat, 03 Apr 2010 03:29:59 +0700
+
 checkfs (0.2) zelazny; urgency=low
 
   * Unconditionally check filesystems on startup - should catch more FS
