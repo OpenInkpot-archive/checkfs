@@ -27,10 +27,6 @@ check_repair_fs() {
 
 # FIXME: a bit more flexible
 
-if ! check_repair_fs $(first /dev/mmcblk*p*) "SD card"; then
-  emessage "Filesystem on SD card is damaged. Please reformat or repair it."
-fi
-
 if ! check_repair_fs $(mountpoint_device /mnt/storage) "Internal storage"; then
   emessage "Internal storage filesystem is damaged. Please attach device to computer and reformat or repair it."&
   usbwatcher&
