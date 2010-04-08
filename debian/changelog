@@ -1,3 +1,9 @@
+checkfs (0.4) zelazny; urgency=low
+
+  * Disable checking of SD card due to low speed of the process.
+
+ -- Mikhail Gusarov <dottedmag@dottedmag.net>  Thu, 08 Apr 2010 21:30:28 +0700
+
 checkfs (0.3) zelazny; urgency=low
 
   * Fixed SD card checking: check /dev/mmcblk0p1, not /dev/mmcblk0
